@@ -4,6 +4,11 @@
 
 画一条线，挡住蜂群，保护你的萌宠！
 
+<p align="center">
+  <img src="docs/media/title.webp" width="280" alt="标题画面">
+  <img src="docs/media/gameplay.gif" width="280" alt="5-4 石雨：一笔斜挡板送走炸弹，一笔缓坡送走滚石">
+</p>
+
 一款竖屏网页物理小游戏：观察关卡 → 按住拖动画一笔 → 松手后墨线变成有重量的实体 → 蜂群、胡蜂、鳄鱼、青蛙、炸弹和落石一起扑上来 → 撑过倒计时就过关。
 
 ## 玩法一览
@@ -21,6 +26,17 @@
 
 操作：鼠标或手指拖动画线；`R` 重来，`Esc` 暂停，多笔关卡按空格提前开始。
 
+## 截图
+
+| 2-5 空中鸟窝 | 3-6 火山爆发 | 4-6 冰锥雨 | 5-2 鳄鱼与炸弹 |
+| :---: | :---: | :---: | :---: |
+| <img src="docs/media/level-2-5.webp" width="200" alt="2-5 空中鸟窝：画一整圈套住鸟窝"> | <img src="docs/media/level-3-6.webp" width="200" alt="3-6 火山爆发：斜挡板接住炸弹，罩子撑在两块石头之间"> | <img src="docs/media/level-4-6.webp" width="200" alt="4-6 冰锥雨：两脚撑住石头的陡屋顶"> | <img src="docs/media/level-5-2.webp" width="200" alt="5-2 鳄鱼与炸弹：穿过两颗图钉的 U 形罩"> |
+| 一整圈套住鸟窝，青蛙的舌头也挡得住 | 斜挡板把炸弹送走，罩子撑在石头之间 | 屋顶够陡，冰锥才会擦着坡滑走 | 双钉 U 形罩，鳄鱼叼不走 |
+
+| 选关 | 萌宠小屋 | 失败时的原因和建议 |
+| :---: | :---: | :---: |
+| <img src="docs/media/map.webp" width="200" alt="选关画面"> | <img src="docs/media/shop.webp" width="200" alt="萌宠小屋"> | <img src="docs/media/fail.webp" width="200" alt="失败画面：被鳄鱼一口吞了，附带建议"> |
+
 ## 开发
 
 ```sh
@@ -34,7 +50,7 @@ pnpm verify       # 上面全部，CI 跑的就是这个
 
 需要 Node 24 或更高版本，以及 pnpm（版本见 `package.json` 的 `packageManager`）。
 
-`pnpm build` 的产物在 `dist/`，是纯静态站点，可以放到任何静态托管上。如果站点不在域名根路径（比如 GitHub Pages 的 `/budline/`），用 `pnpm build --base=/budline/` 构建。
+`pnpm build` 的产物在 `dist/`，是纯静态站点，资源都用相对路径，放到任何静态托管的任意路径下都能用。线上版本部署在 Cloudflare Workers（静态资源托管，没有服务端代码），配置见 `wrangler.jsonc`。先 `pnpm dlx wrangler@4 login` 登录，之后 `pnpm run deploy` 会构建并上传。
 
 调试参数：`?level=3-4` 直接进入关卡；`?level=3-4&auto` 自动画出参考解法；`?level=3-4&auto=naive` 画一个“新手标准罩子”，用来判断关卡是否有足够挑战；`?endless` 直接进入无尽模式。
 
@@ -57,13 +73,13 @@ tests              单元测试与关卡验证
 
 设计关卡时可以用 `LAB=3- pnpm vitest run tests/lab.test.ts --silent=false --reporter=verbose` 查看每关在参考解法、不画线和各种标准罩子下的结果。
 
-所有美术都是代码绘制，所有音效和背景音乐都是 WebAudio 实时合成，项目里没有图片或音频素材。存档只保存在浏览器 localStorage 里。
+所有美术都是代码绘制，所有音效和背景音乐都是 WebAudio 实时合成，游戏本身不含任何图片或音频素材（`docs/media/` 里只有 README 用的截图）。存档只保存在浏览器 localStorage 里。
 
 设计说明见 [docs/design.md](docs/design.md)。
 
 ## English
 
-**Budline** is a portrait-mode browser physics game. Draw a single stroke; when you let go it becomes a solid, weighted body, and it has to keep your pet safe from bee swarms, hornets, crocodiles, frogs, bombs and falling rocks until the timer runs out. It has 30 levels across 5 worlds, an endless mode, boosters and collectible pets. All art is drawn in code and all sound is synthesized with WebAudio, so the repo contains no image or audio files. The in-game text is Chinese only for now.
+**Budline** is a portrait-mode browser physics game. Draw a single stroke; when you let go it becomes a solid, weighted body, and it has to keep your pet safe from bee swarms, hornets, crocodiles, frogs, bombs and falling rocks until the timer runs out. It has 30 levels across 5 worlds, an endless mode, boosters and collectible pets. All art is drawn in code and all sound is synthesized with WebAudio, so the game ships no image or audio files. The in-game text is Chinese only for now.
 
 Physics runs on deterministic Rapier with a fixed timestep, so every level's reference solution is replayed in the test suite (`pnpm test`) to check that it still wins, that drawing nothing loses, and that a beginner's plain dome fails.
 

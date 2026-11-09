@@ -1,0 +1,8 @@
+// Cloudflare Workers static assets: `pnpm run deploy` builds and uploads dist/.
+{
+  "name": "budline",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}

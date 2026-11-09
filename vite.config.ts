@@ -1,6 +1,8 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
+  // Relative asset URLs, so the build works from any path (e.g. GitHub Pages at /budline/).
+  base: "./",
   optimizeDeps: {
     exclude: ["@dimforge/rapier2d-deterministic"],
   },

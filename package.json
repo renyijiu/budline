@@ -15,6 +15,7 @@
     "levels": "vitest run tests/levels.test.ts",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
+    "deploy": "pnpm build && pnpm dlx wrangler@4.158.0 deploy",
     "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
   },
   "dependencies": {
