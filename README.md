@@ -4,6 +4,8 @@
 
 画一条线，挡住蜂群，保护你的萌宠！
 
+**[▶ 在线试玩：budline.renyijiu.com](https://budline.renyijiu.com)**（手机、电脑浏览器都能玩）
+
 <p align="center">
   <img src="docs/media/title.webp" width="280" alt="标题画面">
   <img src="docs/media/gameplay.gif" width="280" alt="5-4 石雨：一笔斜挡板送走炸弹，一笔缓坡送走滚石">
@@ -50,7 +52,7 @@ pnpm verify       # 上面全部，CI 跑的就是这个
 
 需要 Node 24 或更高版本，以及 pnpm（版本见 `package.json` 的 `packageManager`）。
 
-`pnpm build` 的产物在 `dist/`，是纯静态站点，资源都用相对路径，放到任何静态托管的任意路径下都能用。线上版本部署在 Cloudflare Workers（静态资源托管，没有服务端代码），配置见 `wrangler.jsonc`。先 `pnpm dlx wrangler@4 login` 登录，之后 `pnpm run deploy` 会构建并上传。
+`pnpm build` 的产物在 `dist/`，是纯静态站点，资源都用相对路径，放到任何静态托管的任意路径下都能用。线上版本 [budline.renyijiu.com](https://budline.renyijiu.com) 部署在 Cloudflare Workers（静态资源托管，没有服务端代码），配置见 `wrangler.jsonc`。先 `pnpm dlx wrangler@4 login` 登录，之后 `pnpm run deploy` 会构建并上传。自己部署的话，把 `wrangler.jsonc` 里的域名换成你自己的，或者删掉 `routes` 并把 `workers_dev` 改成 `true`。
 
 调试参数：`?level=3-4` 直接进入关卡；`?level=3-4&auto` 自动画出参考解法；`?level=3-4&auto=naive` 画一个“新手标准罩子”，用来判断关卡是否有足够挑战；`?endless` 直接进入无尽模式。
 
@@ -79,7 +81,7 @@ tests              单元测试与关卡验证
 
 ## English
 
-**Budline** is a portrait-mode browser physics game. Draw a single stroke; when you let go it becomes a solid, weighted body, and it has to keep your pet safe from bee swarms, hornets, crocodiles, frogs, bombs and falling rocks until the timer runs out. It has 30 levels across 5 worlds, an endless mode, boosters and collectible pets. All art is drawn in code and all sound is synthesized with WebAudio, so the game ships no image or audio files. The in-game text is Chinese only for now.
+**Budline** is a portrait-mode browser physics game. [Play it at budline.renyijiu.com](https://budline.renyijiu.com). Draw a single stroke; when you let go it becomes a solid, weighted body, and it has to keep your pet safe from bee swarms, hornets, crocodiles, frogs, bombs and falling rocks until the timer runs out. It has 30 levels across 5 worlds, an endless mode, boosters and collectible pets. All art is drawn in code and all sound is synthesized with WebAudio, so the game ships no image or audio files. The in-game text is Chinese only for now.
 
 Physics runs on deterministic Rapier with a fixed timestep, so every level's reference solution is replayed in the test suite (`pnpm test`) to check that it still wins, that drawing nothing loses, and that a beginner's plain dome fails.
 
