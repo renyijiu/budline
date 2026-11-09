@@ -1,0 +1,32 @@
+{
+  "name": "budline",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.18.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "vite",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "levels": "vitest run tests/levels.test.ts",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
+  },
+  "dependencies": {
+    "@dimforge/rapier2d-deterministic": "0.19.3"
+  },
+  "devDependencies": {
+    "@dimforge/rapier2d-deterministic-compat": "0.19.3",
+    "@types/node": "24.10.0",
+    "eslint": "10.8.0",
+    "typescript": "6.0.2",
+    "typescript-eslint": "8.66.0",
+    "vite": "8.1.0",
+    "vitest": "4.1.10"
+  }
+}

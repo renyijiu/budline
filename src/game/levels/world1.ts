@@ -1,0 +1,125 @@
+import { arc, ground, p, path, poly, rect } from "./build";
+import type { LevelDef } from "./types";
+
+/** Chapter 1 — Sunny Meadow: bees, terrain you can lean on, and pins. */
+const W = 1;
+const G = 1050;
+const PET_Y = G - 34;
+
+export const world1: LevelDef[] = [
+  {
+    id: "1-1",
+    world: W,
+    index: 1,
+    name: "初次见面",
+    tip: "按住拖动画一条线，把团团护起来！",
+    time: 8,
+    ink: 900,
+    par: 420,
+    terrain: [ground(G)],
+    pets: [p(360, PET_Y)],
+    hives: [{ x: 360, y: 380, hang: true, waves: [{ at: 0.3, count: 14 }] }],
+    naiveOk: true,
+    solution: [arc(360, G - 6, 118, 185, 355, 22)],
+  },
+  {
+    id: "1-2",
+    world: W,
+    index: 2,
+    name: "小山谷",
+    tip: "线会掉下来，搭在两边的山坡上就稳了。",
+    time: 9,
+    ink: 330,
+    par: 300,
+    terrain: [
+      poly("grass", p(-40, 520), p(260, 1060), p(260, 1320), p(-40, 1320)),
+      poly("grass", p(460, 1060), p(760, 520), p(760, 1320), p(460, 1320)),
+      rect(250, 1060, 220, 300, "grass"),
+    ],
+    pets: [p(360, 1026)],
+    hives: [
+      { x: 360, y: 380, hang: true, waves: [{ at: 0.3, count: 10 }] },
+      { x: 640, y: 420, hang: true, waves: [{ at: 1.2, count: 8 }] },
+    ],
+    naiveOk: true,
+    solution: [path(12, p(218, 958), p(502, 958))],
+  },
+  {
+    id: "1-3",
+    world: W,
+    index: 3,
+    name: "左右夹击",
+    tip: "蜜蜂会绕着找缝钻，线的两头要贴紧地面。",
+    time: 9,
+    ink: 560,
+    par: 430,
+    terrain: [ground(G)],
+    pets: [p(360, PET_Y)],
+    hives: [
+      { x: 100, y: 560, hang: true, waves: [{ at: 0.3, count: 12 }] },
+      { x: 620, y: 560, hang: true, waves: [{ at: 0.6, count: 12 }] },
+    ],
+    naiveOk: true,
+    solution: [arc(360, G - 8, 124, 182, 358, 24)],
+  },
+  {
+    id: "1-4",
+    world: W,
+    index: 4,
+    name: "乌云罩顶",
+    tip: "乌云里画不了线……那就画在乌云上面，让它掉下来盖住！",
+    time: 9,
+    ink: 480,
+    par: 440,
+    terrain: [ground(G), rect(170, 940, 50, 200, "rock"), rect(500, 940, 50, 200, "rock")],
+    noDraw: [{ x: 140, y: 650, w: 440, h: 390 }],
+    pets: [p(360, PET_Y)],
+    hives: [
+      { x: 360, y: 380, hang: true, waves: [{ at: 0.6, count: 10 }] },
+      { x: 80, y: 560, hang: true, waves: [{ at: 1.4, count: 7 }] },
+      { x: 640, y: 560, hang: true, waves: [{ at: 1.8, count: 7 }] },
+    ],
+    solution: [path(12, p(150, 625), p(570, 625))],
+  },
+  {
+    id: "1-5",
+    world: W,
+    index: 5,
+    name: "山洞的门",
+    tip: "墨水只够画一扇门！线穿过图钉会被钉住，让门脚斜斜地抵住地面。",
+    time: 9,
+    ink: 190,
+    par: 170,
+    terrain: [ground(G), rect(-40, 790, 510, 90, "rock"), rect(-40, 790, 90, 400, "rock")],
+    pins: [p(452, 904)],
+    pets: [p(240, PET_Y)],
+    hives: [
+      { x: 620, y: 380, hang: true, waves: [{ at: 0.3, count: 10 }] },
+      { x: 640, y: 960, waves: [{ at: 1.2, count: 8 }] },
+    ],
+    solution: [path(10, p(446, 893), p(452, 904), p(502, 1036))],
+  },
+  {
+    id: "1-6",
+    world: W,
+    index: 6,
+    name: "一笔连两只",
+    tip: "只有一笔，却有两只要护！从左边画起，一路连到高台上。",
+    time: 10,
+    ink: 940,
+    par: 880,
+    terrain: [ground(G), rect(420, 820, 220, 400, "rock")],
+    pets: [p(200, PET_Y), p(530, 786)],
+    hives: [
+      { x: 300, y: 380, hang: true, waves: [{ at: 0.3, count: 12 }] },
+      { x: 680, y: 560, hang: true, waves: [{ at: 1, count: 8 }] },
+      { x: 70, y: 640, hang: true, waves: [{ at: 1.6, count: 6 }] },
+    ],
+    solution: [
+      [
+        ...path(14, p(112, 1037), p(122, 965), p(165, 925), p(230, 912), p(300, 925), p(360, 950), p(411, 970)),
+        ...path(14, p(411, 940), p(411, 812), p(440, 752), p(500, 728), p(570, 728), p(620, 752), p(630, 810)),
+      ],
+    ],
+  },
+];

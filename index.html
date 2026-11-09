@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#7fd0ff" />
+    <meta name="description" content="一笔护崽：画一条线，挡住蜂群、鳄鱼和炸弹，保护你的萌宠。" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='17' r='13' fill='%23f4b26b' stroke='%233b2a40' stroke-width='2.5'/%3E%3Ccircle cx='11' cy='15' r='2' fill='%233b2a40'/%3E%3Ccircle cx='21' cy='15' r='2' fill='%233b2a40'/%3E%3C/svg%3E" />
+    <title>一笔护崽</title>
+  </head>
+  <body>
+    <div id="stage">
+      <div id="frame">
+        <canvas id="game" aria-label="游戏画面：按住拖动画线"></canvas>
+        <div id="ui"></div>
+        <div id="loading"><div class="spinner"></div><p>正在叫醒萌宠…</p></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

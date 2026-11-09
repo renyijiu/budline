@@ -1,0 +1,148 @@
+import { arc, ground, p, path, rect } from "./build";
+import type { LevelDef } from "./types";
+
+/** Chapter 3 — Volcano: lava, bombs that blow ink apart, boulders that snap it, hornets that ram it. */
+const W = 3;
+const G = 1050;
+const PET_Y = G - 34;
+
+export const world3: LevelDef[] = [
+  {
+    id: "3-1",
+    world: W,
+    index: 1,
+    name: "炸弹雨",
+    tip: "炸弹会把墨线炸断！先用一笔钉一块斜挡板，让炸弹滚走，再画罩子。",
+    time: 9,
+    ink: 780,
+    par: 740,
+    strokes: 2,
+    terrain: [ground(G, "basalt")],
+    pins: [p(240, 640), p(500, 774)],
+    events: [
+      { type: "bomb", at: 0.8, x: 350 },
+      { type: "bomb", at: 2.8, x: 380 },
+      { type: "bomb", at: 4.8, x: 330 },
+    ],
+    pets: [p(360, PET_Y)],
+    hives: [
+      { x: 110, y: 420, hang: true, waves: [{ at: 0.4, count: 10 }] },
+      { x: 640, y: 480, hang: true, waves: [{ at: 1.2, count: 8 }] },
+    ],
+    solution: [path(12, p(222, 630), p(240, 640), p(500, 774), p(600, 826)), arc(360, G - 8, 100, 182, 358, 20)],
+  },
+  {
+    id: "3-2",
+    world: W,
+    index: 2,
+    name: "滚石来袭",
+    tip: "石头正面撞上墨线会把它撞断！画一道缓坡，让石头顺着滚上去、飞过头顶。",
+    time: 9,
+    ink: 640,
+    par: 600,
+    terrain: [ground(G, "basalt")],
+    events: [
+      { type: "boulder", at: 1.2, x: 790, y: 1014, vx: -520 },
+      { type: "boulder", at: 3.6, x: 790, y: 1014, vx: -560 },
+      { type: "boulder", at: 6.0, x: 790, y: 1014, vx: -540 },
+    ],
+    pets: [p(250, PET_Y)],
+    hives: [{ x: 160, y: 420, hang: true, waves: [{ at: 0.4, count: 11 }] }],
+    solution: [path(12, p(610, 1037), p(240, 900), p(130, 1037))],
+    pitfalls: [{ name: "steep tent the boulder hits head-on", strokes: [path(10, p(330, 1037), p(250, 900), p(160, 1037))] }],
+  },
+  {
+    id: "3-3",
+    world: W,
+    index: 3,
+    name: "石板底下",
+    tip: "石板太低，里面画不下罩子。那就把整块石板一起罩住！",
+    time: 9,
+    ink: 860,
+    par: 820,
+    terrain: [ground(G, "basalt"), rect(150, 886, 420, 80, "basalt")],
+    pets: [p(360, PET_Y)],
+    hives: [
+      { x: 70, y: 990, waves: [{ at: 0.3, count: 9 }] },
+      { x: 650, y: 990, waves: [{ at: 0.6, count: 9 }] },
+      { x: 360, y: 380, hang: true, waves: [{ at: 1.2, count: 6 }] },
+    ],
+    solution: [path(14, p(126, 1037), p(128, 960), p(130, 878), p(148, 864), p(360, 862), p(572, 864), p(590, 878), p(592, 960), p(594, 1037))],
+  },
+  {
+    id: "3-4",
+    world: W,
+    index: 4,
+    name: "熔岩断桥",
+    tip: "石桥要塌了，蜂群从岩浆那边飞上来！在桥下钉一张网接住团团。",
+    time: 9,
+    ink: 420,
+    par: 380,
+    terrain: [rect(-40, 900, 230, 500, "basalt"), rect(530, 900, 230, 500, "basalt")],
+    hazards: [{ type: "lava", x: 190, y: 1120, w: 340, h: 180 }],
+    props: [{ type: "box", x: 360, y: 912, w: 340, h: 24, breakAt: 0.6, style: "rock" }],
+    pins: [p(206, 960), p(514, 960)],
+    pets: [p(360, 866)],
+    hives: [
+      { x: 280, y: 1080, waves: [{ at: 0.8, count: 8 }] },
+      { x: 440, y: 1080, waves: [{ at: 1.2, count: 8 }] },
+    ],
+    solution: [path(12, p(204, 950), p(206, 960), p(260, 1010), p(360, 1022), p(460, 1010), p(514, 960), p(516, 950))],
+  },
+  {
+    id: "3-5",
+    world: W,
+    index: 5,
+    name: "熔岩两岸",
+    tip: "两只隔着岩浆，只有一笔。蜂群会从岩浆上飞上来，中间的缺口也要封住！",
+    time: 10,
+    ink: 980,
+    par: 940,
+    terrain: [rect(-40, 960, 290, 400, "basalt"), rect(470, 960, 290, 400, "basalt")],
+    hazards: [{ type: "lava", x: 250, y: 1120, w: 220, h: 180 }],
+    pets: [p(150, 926), p(570, 926)],
+    hives: [
+      { x: 360, y: 1070, waves: [{ at: 0.4, count: 12 }] },
+      { x: 360, y: 380, hang: true, waves: [{ at: 1.4, count: 8 }] },
+    ],
+    solution: [
+      [
+        ...path(14, p(58, 951), p(60, 900), p(90, 852), p(150, 834), p(210, 852), p(240, 900), p(243, 951)),
+        ...path(14, p(300, 951), p(420, 951), p(477, 951), p(480, 900), p(510, 852), p(570, 834), p(630, 852), p(660, 900), p(662, 951)),
+      ],
+    ],
+  },
+  {
+    id: "3-6",
+    world: W,
+    index: 6,
+    name: "火山爆发",
+    tip: "炸弹、胡蜂、蜂群一起来！挡板挡炸弹，罩子靠住石头。",
+    time: 10,
+    ink: 880,
+    par: 840,
+    strokes: 2,
+    terrain: [ground(G, "basalt"), rect(170, 940, 50, 200, "basalt"), rect(500, 940, 50, 200, "basalt")],
+    pins: [p(480, 640), p(220, 774)],
+    events: [
+      { type: "bomb", at: 1.6, x: 370 },
+      { type: "bomb", at: 4.2, x: 340 },
+      { type: "bomb", at: 6.4, x: 360 },
+    ],
+    pets: [p(360, PET_Y)],
+    hives: [
+      {
+        x: 620,
+        y: 400,
+        hang: true,
+        waves: [
+          { at: 0.3, count: 12 },
+          { at: 1.5, count: 2, kind: "hornet" },
+          { at: 4.2, count: 2, kind: "hornet" },
+        ],
+      },
+      { x: 100, y: 500, hang: true, waves: [{ at: 2.5, count: 6 }, { at: 6, count: 8 }] },
+    ],
+    solution: [path(12, p(498, 630), p(480, 640), p(220, 774), p(120, 826)), arc(360, G - 8, 130, 182, 358, 24)],
+  },
+];
